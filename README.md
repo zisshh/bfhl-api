@@ -2,6 +2,10 @@
 
 A FastAPI backend that implements the `/bfhl` POST endpoint according to the project brief. This service processes arrays and returns categorized data including numbers, alphabets, special characters, and computed values.
 
+## Deployment
+
+This service is deployed on `Render` at https://bfhl-api-5oa4.onrender.com
+
 ## Quick Start
 
 ### Prerequisites
