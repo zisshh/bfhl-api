@@ -2,6 +2,7 @@ from typing import List
 import os
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel, Field
 
 
@@ -129,3 +130,22 @@ if __name__ == "__main__":
 
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
 
+
+# -------- Convenience endpoints (root + health) --------
+
+@app.get("/", include_in_schema=False)
+def root() -> HTMLResponse:
+    html = (
+        "<html><head><title>BFHL API</title></head><body>"
+        "<h1>BFHL API</h1>"
+        "<p>Welcome! This service exposes a single endpoint:</p>"
+        "<ul><li><code>POST /bfhl</code> — process your input array</li></ul>"
+        "<p>Interactive docs: <a href=\"/docs\">/docs</a></p>"
+        "</body></html>"
+    )
+    return HTMLResponse(content=html)
+
+
+@app.get("/healthz", include_in_schema=False)
+def healthz() -> JSONResponse:
+    return JSONResponse({"status": "ok"})
